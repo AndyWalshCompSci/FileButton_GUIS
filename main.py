@@ -1,15 +1,16 @@
 '''
 Andy Walsh
 File Button
-Oct. 26
+Oct. 26 
 '''
 
 
 from tkinter import *
 import random
 from PIL import Image
-from tkinter import ttk, messagebox
+from tkinter import ttk
 from tkinter import filedialog as fd
+import Not_main
 
 root=Tk()
 
@@ -17,6 +18,7 @@ root=Tk()
 root.geometry("500x500")
 
 #image grab
+
 def select_files():
     global my_image
     global filename
@@ -24,11 +26,11 @@ def select_files():
     filename = fd.askopenfilename(title='Open files', initialdir='/', filetypes=filetypes)
     my_image = Image.open(filename)
     #loop_img(my_image)
-def glitch():
-    loop_img(my_image)
+    return my_image
 
-def pop_up():
-    messagebox.showwarning("showwarning", "WARNING... Self distruct process has begun...")
+def glitch():
+   select_files()
+
 
 # add the parameter my_image to your function
 def loop_img(my_image):
@@ -71,6 +73,7 @@ def My_image():
     rows = my_image.size[0]
     cols = my_image.size[1]
     print(rows, cols)
+    Not_main.message()
 
     px = my_image.load()
     for i in range(0, rows, skip_lines_int):
@@ -103,7 +106,6 @@ def My_image():
 
 #FLip Image Function
 def flip():
-
     imageObject = Image.open(filename)
     hori_flippedImage = imageObject.transpose(Image.FLIP_LEFT_RIGHT)
 
@@ -144,7 +146,7 @@ box_3_label.grid(row=8, column=4)
 
 
 #WARNING button
-pop_up_btn = Button(root, text='DO NOT PRESS', command=pop_up)
+pop_up_btn = Button(root, text='DO NOT PRESS', command=Not_main.pop_up)
 pop_up_btn.grid(row=4, column=4)
 #performing an infinite loop
 #for window display
